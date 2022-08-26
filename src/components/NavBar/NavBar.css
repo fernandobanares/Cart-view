@@ -1,0 +1,27 @@
+.header{
+    background-color:blueviolet;
+    padding: 2rem 0;
+    position:sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-nav{
+    display: flex;
+  }
+  .nav-ul{
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-evenly;
+  }
+  .ul-li{
+    font-family: sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    transition: color .3s;
+  }
+  .ul-li:hover{
+    color: #61dafb
+  }
+  .ul-img{
+    width: 50px;
+  }

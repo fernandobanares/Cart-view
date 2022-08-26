@@ -1,0 +1,15 @@
+.cart-widget{
+    font-size: 2rem;
+    color: #ffffff;
+    transition: color .3s;
+    cursor: pointer;
+}
+.cart-widget:hover{
+    color: #61dafb;
+}
+.totalAmount{
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-left: .5rem;
+}

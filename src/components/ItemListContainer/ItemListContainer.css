@@ -1,0 +1,27 @@
+.itemsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40rem, 23%));
+    place-content: center;
+    column-gap: 2rem;
+    padding: 2rem;
+}
+
+.greeting {
+    font-size: 4rem;
+    text-align: center;
+    padding-top: 2rem;
+    text-transform: capitalize;
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+.products {
+    opacity: 0;
+    animation: fade-in 1.5s forwards;
+}

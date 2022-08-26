@@ -1,0 +1,123 @@
+p {
+    color: #ffffff;
+    font-size: 2rem;
+}
+
+.sectionDetail {
+    padding: 3rem;
+}
+
+.sectionContainer {
+    display: grid;
+    background-color:darkslateblue;
+    grid-template-columns: 30% 65%;
+    justify-content: center;
+    gap: 5rem;
+    border-radius: .6rem;
+    box-shadow: 7px 5px 14px -6px #000000;
+    padding: 3rem;
+}
+
+.imgContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.detailImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 7px 5px 14px -6px #ffffff84;
+    border-radius: .6rem;
+}
+
+.detailContainer {
+    display: flex;
+    width: 55%;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 1.8rem;
+    border-radius: .6rem;
+
+}
+.detailCategory {
+    font-size: 1.8rem;
+    color: #ffffffd7;
+    font-style: italic;
+}
+
+.detailName {
+    color: #ffffff;
+    font-size: 2.8rem;
+}
+
+.detailDescription {
+    font-size: 2rem;
+}
+.detailPrice{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.detailStock{
+    color: #ffffffd7
+}
+.showCart{
+    background-color: transparent;
+    color: #ffffff;
+    font-family: 'Antonio', sans-serif; 
+    font-size: 1.8rem;
+    border: solid 2px #ffffff;
+    padding: 1rem ;
+    margin-top: 1rem;
+    border-radius: .6rem;
+    cursor: pointer;
+    transition: all .3s;
+    text-align: center;
+}
+.showCart:hover{
+    color: #61dafb;
+    border: solid 2px #61dafb;
+}
+.link-categoria,
+.link-inicio {
+    font-size: 1.8rem;
+    transition: color .3s;
+    margin-top: 3rem;
+}
+
+.link-categoria:hover,
+.link-inicio:hover {
+    color: #61dafb
+}
+
+@media (max-width:768px) {
+    .sectionDetail{
+        padding: 1.5rem;
+    }
+    .sectionContainer {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .detailContainer {
+        align-items: center;
+        width: 100%;
+    }
+
+    .count-container {
+        align-items: center;
+    }
+
+    .product-display {
+        justify-content: center;
+    }
+    .product-amount{
+        width: 20%;
+    }
+    .detailDescription {
+        text-align: center;
+    }
+    .product-addCart, .showCart {
+        width: 100%;
+    }
+}
