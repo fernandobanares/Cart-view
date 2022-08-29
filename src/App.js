@@ -6,7 +6,10 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart';
 import { CartProvider } from './store/cartContext'
 
+import firestoreDB from './services/firebase';
+
 function App() {
+  console.log(firestoreDB)
   return (
     <>
       <BrowserRouter>
