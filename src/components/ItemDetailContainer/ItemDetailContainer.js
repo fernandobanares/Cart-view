@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react"
-import ItemData from '../../data/data';
 import ItemDetail from "../ItemDetail/ItemDetail";
 import './ItemDetailContainer.css'
 import { useParams } from "react-router-dom"
-// import SpinerLoad from '../SpinerLoad/SpinerLoad';
+
+import firestoreDB from '../../services/firebase';
+import { getDoc, collection, doc } from 'firebase/firestore';
 
 function ItemDetailContainer() {
     const [data, setData] = useState([])
     const idUrl = useParams().id
     useEffect(() => {
-        function getProducto() {
+        function getDetail(id) {
             return new Promise((resolve => {
-                let findItem = ItemData.find((element) => element.id === Number(idUrl))
-                setTimeout(() => {
-                    resolve(findItem)
-                }, 2000);
+
+                const productosCollection = collection(firestoreDB, "productos")
+                const docRef = doc(productosCollection, id)
+
+                getDoc(docRef).then(snapshot => {
+                    resolve(
+                        {...snapshot.data(), id: snapshot.id}
+                    )
+                })
             }))
         }
-        getProducto().then(product => {
+        getDetail(idUrl).then(product => {
             setData(product)
         })
     }, [idUrl])
@@ -26,7 +32,6 @@ function ItemDetailContainer() {
         <>
             { data.length === 0 ?
                 <main className="spinnerMain">
-                    {/* <SpinerLoad /> */}
                 </main>
                 :
                 <main>

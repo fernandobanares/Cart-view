@@ -9,7 +9,7 @@ import { CartProvider } from './store/cartContext'
 import firestoreDB from './services/firebase';
 
 function App() {
-  console.log(firestoreDB)
+  // console.log(firestoreDB)
   return (
     <>
       <BrowserRouter>

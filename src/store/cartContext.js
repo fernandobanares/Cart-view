@@ -60,6 +60,16 @@ export function CartProvider({ children }) {
         copyCart.map ((index) => total += index.price * index.amount);
         return total;
     }
+    function totalStock(data) {
+        let indexStock = findItem(data.id)
+        if (indexStock) {
+            return indexStock.stock
+        }
+        else {
+            return data.stock
+        }
+    }
+
     // funciones auxiliares
     // funcion para revisar si existe el item
     function isInCart(id) {
@@ -84,7 +94,7 @@ export function CartProvider({ children }) {
         }
     }
     return (
-        <cartContext.Provider value={{ cart, addToCart, removeItem, removeAll, totalAmount, totalPrice, plusItemsCart, subItemsCart }}>
+        <cartContext.Provider value={{ cart, addToCart, removeItem, removeAll, totalAmount, totalPrice, plusItemsCart, subItemsCart, totalStock }}>
             {children}
         </cartContext.Provider>
     );

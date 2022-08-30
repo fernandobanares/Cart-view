@@ -1,41 +1,69 @@
 import React, { useEffect, useState } from 'react'
-import ItemData from '../../data/data';
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css'
 import { useParams } from "react-router-dom"
-// import SpinerLoad from '../SpinerLoad/SpinerLoad';
+
+import firestoreDB from '../../services/firebase';
+import { getDocs, collection, query, where } from 'firebase/firestore';
+
 
 function ItemListContainer() {
   const [data, setData] = useState([])
   const [greeting, setGreeting] = useState("")
   const idCategory = useParams().idCategory
 
-  useEffect(() => {
+  
     function getProducto() {
       return new Promise((resolve => {
-        setTimeout(() => {
-          resolve(ItemData)
-        }, 2000);
+        
+        const productosCollection = collection(firestoreDB, "productos")
+        
+       getDocs(productosCollection).then( snapshot => {
+        const docsData = snapshot.docs.map( doc => {
+          return {...doc.data(), id: doc.id }
+        })
+        resolve(docsData)
+       })
       }))
     }
-    getProducto().then(products => {
-      let itemsFilter = ItemData.filter((element) => element.category === idCategory)
-      if (idCategory === undefined) {
-        setData(products)
-        setGreeting("Creaciones Janita")
+    function getItemsFromDBbyIdCategory(idCategory) {
+      return new Promise((resolve) => {
+        
+        const productosCollection = collection(firestoreDB, "productos");
+        const queryProducts = query(productosCollection, where("category", "==", idCategory))
+        
+        getDocs(queryProducts).then(snapshot => {
+          const docsData = snapshot.docs.map(doc => {
+            return { ...doc.data(), id: doc.id }
+          });
+          resolve(docsData);
+          console.log(docsData)
+        });
+      });
+    };
+
+    useEffect(() => {
+      if (idCategory) {
+        getItemsFromDBbyIdCategory(idCategory).then((resolve) => {
+          setData(resolve)
+          setGreeting(idCategory)
+          
+        });
+  
+      } else {
+        getProducto().then((resolve) =>{
+          setData(resolve)
+          setGreeting("Todos Nuestros Productos")
+          
+        });
       }
-      else {
-        setData(itemsFilter)
-        setGreeting(`${idCategory}`)
-      }
-    })
-  }, [idCategory])
+    }, [idCategory])
+   
 
   return (
     <>
       {data.length === 0 ?
         <main className='spinnerMain'>
-        {/* <SpinerLoad /> */}
         </main>
         :
         <main className='main, products'>
