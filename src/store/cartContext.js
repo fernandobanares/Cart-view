@@ -93,8 +93,12 @@ export function CartProvider({ children }) {
             setCart(copyCart)   
         }
     }
+    function clearCart(){
+        copyCart = []
+        setCart(copyCart)
+    }
     return (
-        <cartContext.Provider value={{ cart, addToCart, removeItem, removeAll, totalAmount, totalPrice, plusItemsCart, subItemsCart, totalStock }}>
+        <cartContext.Provider value={{ cart, addToCart, removeItem, removeAll, totalAmount, totalPrice, plusItemsCart, subItemsCart, totalStock, clearCart }}>
             {children}
         </cartContext.Provider>
     );

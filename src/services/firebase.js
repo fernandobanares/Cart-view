@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 
-import { getFirestore } from 'firebase/firestore'
+import { addDoc, getFirestore, collection } from 'firebase/firestore'
+import { FormText } from "react-bootstrap";
+import ItemData from "../data/data";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAyUGuLaWAPDQ40-U36wJSINm-Y7OWJSn8",
@@ -13,7 +15,16 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const firestoreDB = getFirestore(app)
+
+export async function saveProductosToFirebase(){
+  
+  const collectionMovies = collection(firestoreDB, "movies")
+
+  for(let item of ItemData){
+    const docref = await addDoc (collectionMovies, item)
+    console.log(docref)
+  }
+}
 
 export default firestoreDB;

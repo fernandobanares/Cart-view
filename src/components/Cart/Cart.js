@@ -22,7 +22,6 @@ function Cart() {
     }
 
     useEffect(() => {
-        console.log("cambie")
     }, [cart])
     
     if (cart.length === 0) {
