@@ -1,15 +1,15 @@
-import ItemCount from '../ItemCount/ItemCount'
-import './ItemDetail.css'
-import { Link } from "react-router-dom"
+import ItemCount from '../ItemCount/ItemCount';
+import './ItemDetail.css';
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { cartContext } from "../../store/cartContext";
 
+
 function ItemDetail({ data }) {
-    const { cart, addToCart, totalStock } = useContext(cartContext);
+    const {cart, addToCart, totalStock } = useContext(cartContext);
     function onAdd(amount) {
         addToCart(data, amount);
     }
-
     return (
         <>
             <section className='sectionDetail'>
@@ -22,7 +22,7 @@ function ItemDetail({ data }) {
                         <h2 className='detailName'>{data.name}</h2>
                         <p className='detailDescription'>{data.description}</p>
                         <p className='detailPrice'>${data.price}</p>
-                        {cart.lenght  === 0 ?
+                        {cart.length === 0 ?
                             <ItemCount stock={totalStock(data)} min={1} onAdd={onAdd}/> :
                             <>
                             <ItemCount stock={totalStock(data)} min={1} onAdd={onAdd}/>

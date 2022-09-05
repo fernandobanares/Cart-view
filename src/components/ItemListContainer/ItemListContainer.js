@@ -2,62 +2,25 @@ import React, { useEffect, useState } from 'react'
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css'
 import { useParams } from "react-router-dom"
-
-import firestoreDB from '../../services/firebase';
-import { getDocs, collection, query, where } from 'firebase/firestore';
+import { getDocs, collection, query, where, getFirestore } from 'firebase/firestore';
 
 
 function ItemListContainer() {
   const [data, setData] = useState([])
   const [greeting, setGreeting] = useState("")
   const idCategory = useParams().idCategory
-
-  
-    function getProducto() {
-      return new Promise((resolve => {
-        
-        const productosCollection = collection(firestoreDB, "productos")
-        
-       getDocs(productosCollection).then( snapshot => {
-        const docsData = snapshot.docs.map( doc => {
-          return {...doc.data(), id: doc.id }
-        })
-        resolve(docsData)
-       })
-      }))
+  useEffect(() => {
+    const queryDB = getFirestore();
+    const queryCollection = collection(queryDB, 'productos');
+    if(idCategory) {
+        const queryFilter = query(queryCollection, where('category', '==', idCategory));
+        getDocs(queryFilter).then(res => setData(res.docs.map(product => ({...product.data(), id: product.id}))))
+        setGreeting(idCategory)
+    } else {
+        getDocs(queryCollection).then(res => setData(res.docs.map(product => ({ ...product.data(), id: product.id}))))
+        setGreeting("Todas nuestros productos")
     }
-    function getItemsFromDBbyIdCategory(idCategory) {
-      return new Promise((resolve) => {
-        
-        const productosCollection = collection(firestoreDB, "productos");
-        const queryProducts = query(productosCollection, where("category", "==", idCategory))
-        
-        getDocs(queryProducts).then(snapshot => {
-          const docsData = snapshot.docs.map(doc => {
-            return { ...doc.data(), id: doc.id }
-          });
-          resolve(docsData);
-          console.log(docsData)
-        });
-      });
-    };
-
-    useEffect(() => {
-      if (idCategory) {
-        getItemsFromDBbyIdCategory(idCategory).then((resolve) => {
-          setData(resolve)
-          setGreeting(idCategory)
-          
-        });
-  
-      } else {
-        getProducto().then((resolve) =>{
-          setData(resolve)
-          setGreeting("Todos Nuestros Productos")
-          
-        });
-      }
-    }, [idCategory])
+}, [idCategory]);
    
 
   return (

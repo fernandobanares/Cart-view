@@ -2,10 +2,8 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import "./CartItem.css"
-// import ItemCount from '../ItemCount/ItemCount'
+
 function CartItem({ img, name, price, amount, removeItemCart, id, stock, plusItem, subItem }) {
-
-
   return (
     <div className='itemCart-container'>
       <img className='cartImg' src={img} alt={`imagen de: ${name}`}></img>
@@ -15,12 +13,11 @@ function CartItem({ img, name, price, amount, removeItemCart, id, stock, plusIte
         <h3 className='cartSubtotal'> Subtotal: ${price}</h3>
         <h3 className='cartStock'>Stock Disponible: {stock}</h3>
         <h3 className='cartQuestion'>¿Desea agregar/quitar productos?</h3>
-        <div className= "buttonsContaier">
-          <button className='products-buttons' onClick={()=> subItem(id)}>-</button>
+        <div className="buttonsContaier">
+          <button className='products-buttons' onClick={() => subItem(id)}>-</button>
           <h2>{amount}</h2>
-          <button className='products-buttons' onClick={()=> plusItem(id)}>+</button>
+          <button className='products-buttons' onClick={() => plusItem(id)}>+</button>
         </div>
-        {/* <ItemCount min={1} stock={stock} id={id}/> */}
         <FontAwesomeIcon className='cartDeleteItem' onClick={() => removeItemCart(id)} icon={faTrashCan}></FontAwesomeIcon>
       </div>
     </div>

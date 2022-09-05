@@ -1,29 +1,23 @@
 import CartItem from "../CartItems/CartItem"
-import ItemData from "../../data/data";
-import { useContext, useEffect } from 'react'
+import { useContext} from 'react'
 import { cartContext } from '../../store/cartContext';
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartArrowDown, faFaceSadTear } from '@fortawesome/free-solid-svg-icons'
-
-
 import "./Cart.css"
 
 function Cart() {
-    const { cart, removeItem, removeAll, totalPrice, totalAmount, plusItemsCart, subItemsCart} = useContext(cartContext);
+    const { cart, removeItem, removeAll, totalPrice, totalAmount, plusItemsCart, subItemsCart } = useContext(cartContext);
+
     function removeItemCart(id) {
         removeItem(id)
     }
-    function plusItem(id){
+    function plusItem(id) {
         plusItemsCart(id)
     }
-    function subItem(id){
+    function subItem(id) {
         subItemsCart(id)
     }
-
-    useEffect(() => {
-    }, [cart])
-    
     if (cart.length === 0) {
         return (
             <main>
@@ -51,7 +45,7 @@ function Cart() {
                                 name={item.name}
                                 price={item.price * item.amount}
                                 amount={item.amount}
-                                stock={ item.stock}
+                                stock={item.stock}
                                 plusItem={plusItem}
                                 subItem={subItem}
                                 removeItemCart={removeItemCart}
@@ -62,11 +56,11 @@ function Cart() {
                 </section>
                 <section className="cartResume">
                     <h1 className="titleResume">Resumen del Pedido</h1>
-                    <h3 className="resume">Cantidad de Productos: {totalAmount()} x ${ItemData[0].price}</h3>
+                    <h3 className="resume">Cantidad de Productos: {totalAmount()}</h3>
                     <h3 className="resume">Subtotal: ${totalPrice()}</h3>
-                    <h3 className="resume">IVA(21%): ${totalPrice() * 0.19}</h3>
+                    <h3 className="resume">IVA(21%): ${totalPrice() * 0.21}</h3>
                     <h3 className="resume">Envío: Gratuito</h3>
-                    <h2 className="totalResume">Total: $ {totalPrice() * 1.19}</h2>
+                    <h2 className="totalResume">Total: $ {totalPrice() * 1.21}</h2>
                     <div className="containerButtonsResume">
                         <Link to={"/"}><button className="cartResumeButtons">Seguir Comprando </button></Link>
                         <Link to={"/checkout"}><button className="cartResumeButtons">Finalizar Compra </button></Link>
