@@ -18,7 +18,7 @@ function ItemListContainer() {
         setGreeting(idCategory)
     } else {
         getDocs(queryCollection).then(res => setData(res.docs.map(product => ({ ...product.data(), id: product.id}))))
-        setGreeting("Todos nuestros productos")
+        setGreeting("Creaciones Janita")
     }
 }, [idCategory]);
    

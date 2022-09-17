@@ -7,7 +7,6 @@ import Cart from './components/Cart/Cart';
 import { CartProvider } from './store/cartContext'
 import Checkout from './components/Checkout/Checkout';
 
-import firestoreDB from './services/firebase';
 
 function App() {
   // console.log(firestoreDB)
